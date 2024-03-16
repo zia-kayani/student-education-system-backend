@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import { User } from '../user/user.schema';
+import Types from 'mongoose'
 
 @Schema()
 export class Course{
@@ -10,7 +11,7 @@ export class Course{
  teacher_id:User
  
  @Prop({type:[{type:mongoose.Schema.Types.ObjectId,ref:'User'}]})
- student_ids:User[]
+ student_ids:(Types.ObjectId|string)[];
 
  @Prop({required:true})
  courseName:string
