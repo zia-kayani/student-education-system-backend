@@ -5,11 +5,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { CourseModule } from './course/course.module';
+import { AuthenticationModule } from './auth/authentication.module';
 
 @Module({
   imports: [
     UserModule,
     CourseModule,
+    AuthenticationModule,  //authenticatino module
     ConfigModule.forRoot(), 
     MongooseModule.forRootAsync({
       imports:[ConfigModule],

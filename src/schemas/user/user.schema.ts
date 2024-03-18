@@ -11,7 +11,7 @@ export class User{
     @Prop({required:true})
     lastName:string
 
-    @Prop({enum:['STUDENT' , 'TEACHER']})
+    @Prop({enum:['student' , 'teacher']})  //user enum to check role
     role:string;
 
     @Prop({required:true , select:false})
