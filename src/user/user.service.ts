@@ -3,10 +3,12 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { UserDcument } from "src/schemas/user/user.schema";
 import { CourseService } from "src/course/course.service";
+import { AuthenticationService } from "src/auth/authentication.service";
 
 @Injectable()
 export class UserService {
     constructor(@InjectModel('User') private readonly userModel: Model<UserDcument>,
+    private readonly authService: AuthenticationService,
     private readonly courseService: CourseService
     ){}
 
@@ -28,6 +30,22 @@ export class UserService {
         const users = await this.userModel.find()
         return users;
     }
+
+        //user login 
+        async findUser(userDTO: {image: string, }){
+            const {image}= userDTO
+            const user = await this.userModel.findOne({image});
+    
+            if(!user){
+                console.log('user not found')
+                return null;
+            }
+            const token = this.authService.generateToken({id:user._id , role:user.role})        
+            console.log(token)
+            return {
+                token , user
+            };
+        }
 
     async findOne(id:string){
         const user = await this.userModel.findById(id);
