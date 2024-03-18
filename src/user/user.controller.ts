@@ -10,7 +10,7 @@ export class UsersController {
         return this.userService.create(creaetUserDTO)
     }
 
-    @Post('/login')
+    @Post('/login')   //user login
     findUser(@Body() userDTO){
        return this.userService.findUser(userDTO)
     }

@@ -10,7 +10,7 @@ import { AuthenticationModule } from "src/auth/authentication.module";
 @Module({
     imports:[
         MongooseModule.forFeature([{name:'User', schema:UserSchema}]),
-         AuthenticationModule,
+         AuthenticationModule,  //Authentication 
          forwardRef(() => CourseModule)],
     controllers:[UsersController],
     providers:[UserService],

@@ -3,7 +3,7 @@ import { AuthenticationService } from "./authentication.service";
 
 @Module({
     imports:[],
-    controllers:[],
+    controllers:[], //controller
     providers:[AuthenticationService],
     exports:[AuthenticationService]
 })

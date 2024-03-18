@@ -34,7 +34,7 @@ export class UserService {
         //user login 
         async findUser(userDTO: {image: string, }){
             const {image}= userDTO
-            const user = await this.userModel.findOne({image});
+            const user = await this.userModel.findOne({image});  //image authentication
     
             if(!user){
                 console.log('user not found')

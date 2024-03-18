@@ -19,7 +19,7 @@ try {
         return jwt.verify(token, this.secretKey)
     
 } catch (error) {
-    console.log('eror while validating token')
+    console.log('eror while validating token') //token generation error
     return null;
 }}
 }

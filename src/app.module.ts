@@ -11,7 +11,7 @@ import { AuthenticationModule } from './auth/authentication.module';
   imports: [
     UserModule,
     CourseModule,
-    AuthenticationModule,
+    AuthenticationModule,  //authenticatino module
     ConfigModule.forRoot(), 
     MongooseModule.forRootAsync({
       imports:[ConfigModule],

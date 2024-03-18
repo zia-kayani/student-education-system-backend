@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { AuthenticationService } from "src/auth/authentication.service";
-
+//teacher guard
 @Injectable()
 export class TeacherGuard implements CanActivate{
     constructor(private readonly authenticationService: AuthenticationService){}

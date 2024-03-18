@@ -10,7 +10,7 @@ export class StudentGuard implements CanActivate{
         const token  = request.headers.authorization?.split(' ')[1]
         if(!token){
             console.log('token does not exit')
-            return false;
+            return false;  //token doont exist
         }
 
         const user =  this.authenticationService.validateToken(token);
