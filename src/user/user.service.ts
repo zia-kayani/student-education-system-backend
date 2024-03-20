@@ -37,11 +37,12 @@ export class UserService {
             const user = await this.userModel.findOne({image});  //image authentication
     
             if(!user){
-                console.log('user not found')
-                return null;
+                console.log('user not found ::UserService>finUser()')
+                return { message: 'user not found with this image'  };
+
             }
             const token = this.authService.generateToken({id:user._id , role:user.role})        
-            console.log(token)
+            console.log('token generated successfully on login' ,token)
             return {
                 token , user
             };

@@ -6,11 +6,20 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { CourseModule } from './course/course.module';
 import { AuthenticationModule } from './auth/authentication.module';
+import { ExamModule } from './exam/exam.module';
+import { LactureModule } from './lacture/lacture.module';
 
 @Module({
   imports: [
+    //zia
     UserModule,
+    ExamModule,
+    LactureModule,
+
+    //nouman
     CourseModule,
+
+     //db
     AuthenticationModule,  //authenticatino module
     ConfigModule.forRoot(), 
     MongooseModule.forRootAsync({

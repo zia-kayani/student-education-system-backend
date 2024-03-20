@@ -16,7 +16,10 @@ generateToken(payload:any):string {
 
 validateToken(token:any):any{
 try {
-        return jwt.verify(token, this.secretKey)
+    const decodedToken = jwt.verify(token, this.secretKey);
+    if(decodedToken){
+        return decodedToken
+    }
     
 } catch (error) {
     console.log('eror while validating token') //token generation error
