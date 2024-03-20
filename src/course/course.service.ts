@@ -19,10 +19,10 @@ export class CourseService {
   async updateCourses(user: UserDcument): Promise<void> {
     console.log("Updating courses for user", user._id, "with role", user.role);
     try {
-        if (user.role === 'TEACHER') {
+        if (user.role === 'teacher') {
             const updateResult = await this.courseModel.updateMany({ teacher_id: user._id }, { teacher_id: user._id }).exec();
             console.log("Updated teacher courses:", updateResult);
-        } else if (user.role === 'STUDENT') {
+        } else if (user.role === 'student') {
             const updateResult=await this.courseModel.updateMany(
                 { student_ids: { $ne: new Types.ObjectId(user._id) } },  // Ensures the ID is not already in the array
                 { $addToSet: { student_ids: new Types.ObjectId(user._id) } }
@@ -42,9 +42,9 @@ export class CourseService {
     const studentIds = [];
 
     users.forEach(user => {
-      if (user.role === 'TEACHER') {
+      if (user.role === 'teacher') {
         teacherId = user._id;
-      } else if (user.role === 'STUDENT') {
+      } else if (user.role === 'student') {
         studentIds.push(user._id);
       }
     });

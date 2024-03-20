@@ -4,12 +4,12 @@ import { CreateCourseDto } from "./dtos/courseDTO.dto";
 import { Course } from "src/schemas/course/course.schema";
 
 
-@Controller('/users/course')
+@Controller('/users')
 
 export class CourseController{
     constructor(private readonly courseService:CourseService){}
 
-    @Post()
+    @Post('/course')
      async createCourse(@Body() createCourseDto:CreateCourseDto) {
         return this.courseService.createCourseWithUsers(createCourseDto);
     }
