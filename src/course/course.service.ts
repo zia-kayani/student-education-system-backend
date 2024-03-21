@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDcument } from '../schemas/user/user.schema';
 import { Course, CourseDocument } from '../schemas/course/course.schema';
-import { CreateCourseDto } from './dtos/courseDTO.dto';
 import {Types} from 'mongoose'
 
 
@@ -35,7 +34,7 @@ export class CourseService {
 }
 
 
-  async createCourseWithUsers(createCourseDto: CreateCourseDto): Promise<Course> {
+  async createCourseWithUsers(createCourseDto): Promise<Course> {
     const users = await this.userModel.find().exec();
 
     let teacherId = '';

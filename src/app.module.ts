@@ -8,6 +8,8 @@ import { CourseModule } from './course/course.module';
 import { AuthenticationModule } from './auth/authentication.module';
 import { ExamModule } from './exam/exam.module';
 import { LactureModule } from './lacture/lacture.module';
+import { StudentProgressModule } from './students-progress/student-progress.module';
+import { LectureProgressModule } from './lectures-progress/lecture-progress.module';
 
 import * as bodyParser from 'body-parser'
 
@@ -20,6 +22,8 @@ import * as bodyParser from 'body-parser'
 
     //nouman
     CourseModule,
+    StudentProgressModule,
+    LectureProgressModule,
 
      //db
     AuthenticationModule,  //authenticatino module
