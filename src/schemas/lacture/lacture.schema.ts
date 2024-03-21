@@ -18,6 +18,12 @@ webcamScreenshots:string[]
 
 @Prop({required:true})
 windowScreenshots:string[]
+
+@Prop({ default: Date.now }) 
+createdAt: Date;
+
+@Prop({ default: Date.now })
+updatedAt: Date;
 }
 
 export type LactureDocument = Lacture & Document;
