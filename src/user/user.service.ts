@@ -15,13 +15,7 @@ export class UserService {
     async create(creaetUserDTO){
         
              const user = await this.userModel.create(creaetUserDTO)
-             try {
-                console.log(`Calling updateCourses for user ${user._id} & ${user.role}`);
-                await this.courseService.updateCourses(user);
-                console.log(`Finished calling updateCourses for user ${user._id}`);
-            } catch (error) {
-                console.error('Error updating courses:', error);
-            }
+             await this.courseService.updateCourses(user);
              return user;
    
     }
