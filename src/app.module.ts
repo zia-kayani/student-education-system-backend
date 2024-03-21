@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module , MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -8,6 +8,8 @@ import { CourseModule } from './course/course.module';
 import { AuthenticationModule } from './auth/authentication.module';
 import { ExamModule } from './exam/exam.module';
 import { LactureModule } from './lacture/lacture.module';
+
+import * as bodyParser from 'body-parser'
 
 @Module({
   imports: [
@@ -53,4 +55,9 @@ import { LactureModule } from './lacture/lacture.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer:MiddlewareConsumer){
+    consumer.apply(bodyParser.json({limit:'100mb'}), bodyParser.urlencoded({ limit: '100mb', extended: true, parameterLimit: 200000 }))
+    .forRoutes({path:'*', method:RequestMethod.ALL})
+  }
+}
