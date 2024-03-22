@@ -20,9 +20,12 @@ export class LectureProgressService {
         }).exec();
         return users.map((user) => user._id.toString());
     }));
+    const flattenedUserID = [].concat(...userID);
+    console.log('USERiD',flattenedUserID),
+    console.log('stduentId',studentids)
     
        const scrns=await this.lactureModel.find({
-        'courseId':userID.toString()
+        'courseId':{$in:flattenedUserID}
        }).exec()
        
 
@@ -73,18 +76,18 @@ export class LectureProgressService {
             const users = await this.courseModel.find({
                 student_ids: studentid
             }).exec();
-            return users.map((user) => user._id.toString());
+            return users.flatMap((user) => user._id.toString());
         }));
-        
+           const flattenedUserID = [].concat(...userID);
            const scrns=await this.lactureModel.find({
-            'courseId':userID.toString()
+            'courseId':{$in:flattenedUserID}
            }).exec()
 
            const webcamScreenshots=scrns.map(scrn=>scrn.webcamScreenshots)
            const windowScreenshots=scrns.map(scrn=>scrn.windowScreenshots)
 
+
            const screenshotsobj=[webcamScreenshots,windowScreenshots]
-           
 
            return screenshotsobj;
     }
@@ -106,9 +109,10 @@ export class LectureProgressService {
             id: id,
             name: names[index] ? names[index] : "Unknown",
             image: images[index] ? images[index] : "No image",
-            lectureAttended:times.length>1?times[times.length-1]:times[index] || 'Not attend any lec',
-            webcamscreenshots:screenshots[0].length>1?screenshots[0][screenshots[0].length-1]:screenshots[0],
-            windowscreenshots:screenshots[1].length>1?screenshots[1][screenshots[1].length-1]:screenshots[1]
+            lectureAttended:times[index]?times[index]:  'Not attend any lec',
+            webcamscreenshots:screenshots[0][index],
+            windowscreenshots:screenshots[1][index],
+            
         }));
     }
 }

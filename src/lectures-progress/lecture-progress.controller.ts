@@ -1,7 +1,7 @@
 import { Controller,Get } from '@nestjs/common';
 import { LectureProgressService } from './lecture-progress.service';
 
-@Controller('/lacture')
+@Controller('/lactures')
 export class LectureProgressController {
     constructor(
         private readonly lectureProgressService:LectureProgressService

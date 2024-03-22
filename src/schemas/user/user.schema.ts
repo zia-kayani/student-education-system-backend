@@ -14,7 +14,7 @@ export class User{
     @Prop({enum:['student' , 'teacher']})  //user enum to check role
     role:string;
 
-    @Prop({required:true , select:false})
+    @Prop({required:true })
     image:string;  //url
 
 }
