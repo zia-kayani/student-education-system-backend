@@ -25,38 +25,35 @@ export class StudentProgressService {
         return users.map(user => user.firstName + " " + user.lastName);
     }
 
-    async StudentImages(studentIds: string[]): Promise<string[]> {
+    async StudentImages(studentIds: string[]): Promise<any> {
         const users = await this.userModel.find({
             '_id': { $in: studentIds }
-        }).exec();
-
+        })
         return users.map(user => user.image);
     }
-    async getNoOfLecs(student_ids:string[]): Promise<number>{
-        const screenshots=await  this.lectureProgressService.getScreenshots(student_ids);
-
-        console.log(screenshots.length)
-       return screenshots[0].length;
+    async getNoOfLecs(student_ids:string[]): Promise<any>{
+        const screenshots=await  this.lectureProgressService.getScreenshots(student_ids);        
+       return screenshots;
     }
 
-    async getNoOfExams(student_ids:string[]): Promise<number>{
+    async getNoOfExams(student_ids:string[]): Promise<any>{
         const userID = await Promise.all(student_ids.map(async (studentid) => {
             const users = await this.courseModel.find({
                 student_ids: studentid
             }).exec();
             return users.map((user) => user._id.toString());
         }));
-        
+        const flattenedUserID=[].concat(...userID)
            const scrns=await this.examModel.find({
-            'courseId':userID.toString()
+            'courseId':{$in: flattenedUserID}
            }).exec()
-
+        
            const webcamScreenshots=scrns.map(scrn=>scrn.webcamScreenshots)
            const windowScreenshots=scrns.map(scrn=>scrn.windowScreenshots)
 
            const screenshotsobj=[webcamScreenshots,windowScreenshots]
 
-           return screenshotsobj[0].length;   
+           return screenshotsobj; 
      }
 
     async getAllStudentProgress(): Promise<any> {
@@ -75,8 +72,8 @@ export class StudentProgressService {
             id: id,
             name: names[index] ? names[index] : "Unknown",
             image: images[index] ? images[index] : "No image",
-            NoOflectures:lectures,
-            NoOfexam:exams
+            NoOflectures:lectures[index].length,
+            NoOfexam:exams[index].length
         }));
     }
 }

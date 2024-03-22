@@ -8,10 +8,10 @@ import {Document} from 'mongoose'
 })
 export class Lacture {
     @Prop({required:true , type:mongoose.Types.ObjectId , ref:'Course'})
- courseId:mongoose.Types.ObjectId | string;
+ courseId?:mongoose.Types.ObjectId | string;
 
  @Prop({required:true, default:'https://res.cloudinary.com/dw3tdazf2/video/upload/v1710921862/gdyze6ufxxinu2snlham.mp4' })
- video:string;
+ video?:string;
 
 @Prop({required:true ,})
 webcamScreenshots:string[]
