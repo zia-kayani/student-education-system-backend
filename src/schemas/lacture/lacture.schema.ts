@@ -14,10 +14,10 @@ export class Lacture {
  video?:string;
 
 @Prop({required:true ,})
-webcamScreenshots:string[]
+webcamScreenshots?:string[]
 
 @Prop({required:true})
-windowScreenshots:string[]
+windowScreenshots?:string[]
 
 @Prop({ default: Date.now }) 
 createdAt: Date;

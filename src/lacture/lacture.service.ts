@@ -60,7 +60,7 @@ export class LactureService {
             return null;
         }
         console.log('lacture is', lacture)
-        return lacture.video;
+        return {'lecture1':lacture.video};
 
 
     }

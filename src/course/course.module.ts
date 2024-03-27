@@ -5,6 +5,7 @@ import { CourseController } from './course.controller';
 import { CourseSchema } from 'src/schemas/course/course.schema';
 import { UserModule } from 'src/user/user.module';
 
+
 @Module({
     imports:[MongooseModule.forFeature([{name:'Course', schema:CourseSchema}]),
     forwardRef(()=>UserModule)],

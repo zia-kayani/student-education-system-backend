@@ -72,8 +72,8 @@ export class StudentProgressService {
             id: id,
             name: names[index] ? names[index] : "Unknown",
             image: images[index] ? images[index] : "No image",
-            NoOflectures:lectures[index].length,
-            NoOfexam:exams[index].length
+            NoOflectures:lectures[index].length<=1?lectures[index].length:lectures[index].length-1,
+            NoOfexam:exams[index].length<=1?exams[index].length:exams[index].length-1
         }));
     }
 }
