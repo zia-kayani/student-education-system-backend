@@ -35,8 +35,8 @@ export class LactureService {
             console.log('user is not student')
             return false;
         }
-
         const studentId = user.id;
+
 
 
        // to check that student in the course student ids
@@ -60,9 +60,11 @@ export class LactureService {
             return null;
         }
         console.log('lacture is', lacture)
-        return {'lecture1':lacture.video};
-
-
+        return {
+            JSON: {
+                lacture:lacture.video
+            }
+        }
     }
 
     //for student role chek
