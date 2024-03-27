@@ -65,7 +65,6 @@ export class LactureService {
                 lacture:lacture.video
             }
         }
-
     }
 
     //for student role chek

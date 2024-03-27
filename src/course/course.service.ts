@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDcument } from '../schemas/user/user.schema';
@@ -19,21 +19,15 @@ export class CourseService {
 
 
   async updateCourses(user: UserDcument): Promise<void> {
-    console.log("Updating courses for user", user._id, "with role", user.role);
-    try {
+ 
         if (user.role === 'teacher') {
-            const updateResult = await this.courseModel.updateMany({ teacher_id: user._id }, { teacher_id: user._id }).exec();
-            console.log("Updated teacher courses:", updateResult);
+            const updateResult = await this.courseModel.updateOne({ teacher_id: user._id }, { teacher_id: user._id }).exec();
         } else if (user.role === 'student') {
-            const updateResult=await this.courseModel.updateMany(
+            const updateResult=await this.courseModel.updateOne(
                 { student_ids: { $ne: new Types.ObjectId(user._id) } },  // Ensures the ID is not already in the array
                 { $addToSet: { student_ids: new Types.ObjectId(user._id) } }
               ).exec();
-            console.log("Updated student courses:", updateResult);
-        }
-    } catch (error) {
-        console.error("Error updating courses for user", user._id, ":", error);
-    }
+            }
 }
 
 

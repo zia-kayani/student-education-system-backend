@@ -7,6 +7,7 @@ import { UserModule } from 'src/user/user.module';
 import { LactureModule } from 'src/lacture/lacture.module';
 
 
+
 @Module({
     imports:[MongooseModule.forFeature([{name:'Course', schema:CourseSchema}]),
     forwardRef(()=>UserModule),
