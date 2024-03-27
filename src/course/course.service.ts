@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { User, UserDcument } from '../schemas/user/user.schema';
 import { Course, CourseDocument } from '../schemas/course/course.schema';
 import {Types} from 'mongoose'
+import { LactureService } from 'src/lacture/lacture.service';
 
 
 @Injectable()
@@ -11,6 +12,8 @@ export class CourseService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDcument>,
     @InjectModel(Course.name) private courseModel: Model<CourseDocument>,
+    private readonly lactureService:LactureService
+
   ) {
   }
 
@@ -54,7 +57,9 @@ export class CourseService {
       student_ids: studentIds,
     });
 
-    return newCourse.save();
+    const savedCourse = await newCourse.save();
+    await this.lactureService.createLacture({ courseId: savedCourse._id });
+    return newCourse;
   }
 
   async getAllCourseUsers(): Promise<Course[]> {

@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, forwardRef } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { LactureSchema } from "src/schemas/lacture/lacture.schema";
 import { LactureController } from "./lacture.controller";
@@ -11,7 +11,9 @@ import { CourseModule } from "src/course/course.module";
     imports:[
          MongooseModule.forFeature([{name:'Lacture' , schema:LactureSchema}]),
          AuthenticationModule,
-         CourseModule
+        //  CourseModule,
+         forwardRef(()=>CourseModule),
+
         ],
     controllers:[LactureController],
     providers:[LactureService],

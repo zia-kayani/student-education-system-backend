@@ -4,10 +4,16 @@ import {CourseService} from '../course/course.service';
 import { CourseController } from './course.controller';
 import { CourseSchema } from 'src/schemas/course/course.schema';
 import { UserModule } from 'src/user/user.module';
+import { LactureModule } from 'src/lacture/lacture.module';
+
 
 @Module({
     imports:[MongooseModule.forFeature([{name:'Course', schema:CourseSchema}]),
-    forwardRef(()=>UserModule)],
+    forwardRef(()=>UserModule),
+    forwardRef(()=>LactureModule),
+
+
+],
     controllers:[CourseController],
     providers:[CourseService],
     exports:[CourseService,MongooseModule]
