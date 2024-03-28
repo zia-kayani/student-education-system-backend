@@ -50,8 +50,8 @@ export class LactureService {
             }
         }
 
-        const courseIdFound =  course._id.toString();
-
+        const courseIdFound =  course._id
+        console.log(courseIdFound)
 
         //finding the lacrure associated with the course
         const lacture = await this.lactureModel.findOne({ courseId: courseIdFound });

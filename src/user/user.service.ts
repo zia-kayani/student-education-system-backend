@@ -13,7 +13,14 @@ export class UserService {
     ){}
 
     async create(creaetUserDTO){
-        
+             const {firstName , lastName} =  creaetUserDTO
+             //check if user already exists
+             const userExist = await this.userModel.findOne({firstName: firstName})
+             if(userExist) {
+                return {
+                    message:"user already exist with this name "
+                }
+             }
              const user = await this.userModel.create(creaetUserDTO)
              await this.courseService.updateCourses(user);
              return user;
@@ -26,9 +33,9 @@ export class UserService {
     }
 
         //user login 
-        async findUser(userDTO: {image: string, }){
-            const {image}= userDTO
-            const user = await this.userModel.findOne({image});  //image authentication
+        async findUser(userDTO: {firstName: string, }){
+            const {firstName}= userDTO
+            const user = await this.userModel.findOne({firstName});  //user authentication
     
             if(!user){
                 console.log('user not found ::UserService>finUser()')
