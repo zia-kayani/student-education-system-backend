@@ -13,7 +13,7 @@ export class Course{
  @Prop({type:[{type:mongoose.Schema.Types.ObjectId,ref:'User'}]})
  student_ids:(Types.ObjectId|string)[];
 
- @Prop({required:true})
+ @Prop({required:true, unique:true})
  courseName:string
 
 }

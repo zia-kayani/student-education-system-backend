@@ -31,7 +31,7 @@ export class CourseService {
 }
 
 
-  async createCourseWithUsers(createCourseDto): Promise<Course> {
+  async createCourseWithUsers(createCourseDto): Promise<any> {
     const users = await this.userModel.find().exec();
 
     let teacherId = '';
@@ -53,7 +53,9 @@ export class CourseService {
 
     const savedCourse = await newCourse.save();
     await this.lactureService.createLacture({ courseId: savedCourse._id });
-    return newCourse;
+    return {
+      message:"course created successfully"
+    };
   }
 
   async getAllCourseUsers(): Promise<Course[]> {
